@@ -77,7 +77,7 @@ function showHint(str) {
 display: inline-block;
 }
 </style>
-<div id="wrapper">
+<div id="wrapper">asd
          <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
