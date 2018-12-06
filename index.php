@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="pt-BR"> 
+ <html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+    <link href="simple-sidebar.css" rel="stylesheet">
+  
+<script>
+function showHint(str) {
+		
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                //document.getElementById("grafico").innerHTML = this.responseText;
+				//$("#grafico").load(this.responseText); 
+				 $("#grafico").html(this.responseText);
+				 gerarGrafico();
+				//window.location.reload(true);
+				
+            }
+        };
+        xmlhttp.open("GET", "getHint.php?" + str, true);
+        xmlhttp.send();
+    }
+
+</script>
+</head>
+<body>
+	
+
+<style>
+.slidecontainer {
+    width: 60%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 25px; /* Specified height */
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #4CAF50; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+    width: 15px; /* Set a specific slider handle width */
+    height: 15px; /* Slider handle height */
+    background: #4CAF50; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+}
+
+.dispInlineBlock{
+display: inline-block;
+}
+</style>
+<div id="wrapper">
+         <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Start Bootstrap
+                    </a>
+                </li>
+                <li >
+					<div class="dispInlineBlock">
+						<div class="content">
+							<div class="row">
+								<div class="class="col-sm-1""> 
+										<span  id="ai"  >0</span> 													
+								</div>
+								<div class="col-sm-1""> 
+									 <span  >ccccc inicial</span>														
+								</div>
+								<div class="class="col-sm-2"">							   
+										<div class="slidecontainer"  style="display: inline-block;" >
+										  <input type="range" min="2017" max="2030" value="2018" class="slider" id="slai" >
+										</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+                </li>
+                <li>
+				<div class="dispInlineBlock">
+                    <a href="#">
+															<span id="af">0</span> <span>Ano Final</span>
+										<div class="slidecontainer"  style="display: inline-block;">
+										  <input type="range" min="2017" max="2030" value="2019" class="slider" id="slaf">
+										</div>
+					</a>
+					</div>	
+                </li>
+                <li>
+				<div class="dispInlineBlock">
+                    <a href="#">
+															<span  id="mi">0</span> <span>Mes inicial</span>
+										<div class="slidecontainer"  style="display: inline-block;">
+										  <input type="range" min="1" max="12" value="1" class="slider" id="slmi">
+										</div>
+					</a>
+					</div>	
+                </li>
+                <li>
+				<div class="dispInlineBlock">
+                    <a href="#">
+															<span id="mf">0</span> <span>Mes Final</span>
+										<div class="slidecontainer"  style="display: inline-block;">
+										  <input type="range" min="1" max="12" value="12" class="slider" id="slmf">
+										</div>
+					</a>
+					</div>	
+                </li>
+                <li>
+				<div class="dispInlineBlock">
+                    <a href="#">
+															<span  id="di">0</span> <span>Dia inicial</span>
+										<div class="slidecontainer"  style="display: inline-block;">
+										  <input type="range" min="1" max="30" value="1" class="slider" id="sldi">
+										</div>
+					</a>
+					</div>	
+                </li>
+                <li>
+				<div class="dispInlineBlock">
+                    <a href="#">
+															<span id="df">0</span> <span>Dia Final</span>
+										<div class="slidecontainer"  style="display: inline-block;">
+										  <input type="range" min="1" max="30" value="30" class="slider" id="sldf">
+										</div>
+					</a>
+					</div>	
+                </li>
+                <li>
+				<div class="dispInlineBlock">
+                    <a href="#">
+													
+										<span  id="hi">0</span> <span>hora inicial</span>
+										<div class="slidecontainer"  style="display: inline-block;">
+										  <input type="range" min="0" max="24" value="0" class="slider" id="slhi">
+										</div>
+										
+									
+					</a>
+					</div>	
+                </li>
+				
+				<li>
+				<div class="dispInlineBlock">
+                    <a href="#">
+															<span id="hf">0</span> <span>hora Final</span>
+										<div class="slidecontainer"  style="display: inline-block;">
+										  <input type="range" min="0" max="24" value="24" class="slider" id="slhf">
+										</div>
+					</a>
+					</div>	
+                </li>
+				<li>
+				<div class="dispInlineBlock">
+                    <a href="#">
+					
+					</a>
+					</div>	
+                </li>
+            </ul>
+        </div>
+		
+								
+							<div class="container-fluid " style=" background-image: linear-gradient(to right, rgba(0,0,255,0.2), rgba(0,0,255,0.3)); min-height:200px">
+								<div class="row">	
+									<div class="col-sm-2">
+										<button type="button" class="btn btn-primary" onclick="showHint()">ry</button>
+										<a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
+
+									</div>	
+							
+
+									
+									
+							</div>
+
+								<div class="row">	
+									<div id="grafico"></div>
+								</div>
+							</div>
+	  </div>
+	  
+	      <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+<script>
+
+$("#slmi").on('input',function(e){
+	$("#mi").html($("#slmi").val());
+});
+
+$("#slmf").on('input',function(e){
+	$("#mf").html($("#slmf").val());
+});
+
+$("#slai").on('input',function(e){
+	$("#ai").html($("#slai").val());
+});
+
+$("#slaf").on('input',function(e){
+	$("#af").html($("#slaf").val());
+});
+
+
+$("#slhi").on('input',function(e){
+	$("#hi").html($("#slhi").val());
+});
+
+
+$("#slhf").on('input',function(e){
+	$("#hf").html($("#slhf").val());
+});
+
+
+$("#sldi").on('input',function(e){
+	$("#di").html($("#sldi").val());
+});
+
+$("#sldf").on('input',function(e){
+	$("#df").html($("#sldf").val());
+});
+//$("#grafico").html(this.responseText);
+//var slmi = document.getElementById("slmi");
+//var mi = document.getElementById("mi");
+//mi.innerHTML = slmi.value; // Display the default slider value
+
+// Update the current slider value (each time you drag the slider handle)
+//slmi.oninput = function() {
+    //mi.innerHTML = this.value;
+//} 
+</script>
+</body>
+</html> 
+
+
+
