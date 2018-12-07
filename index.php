@@ -217,7 +217,7 @@ padding-left: 10px;
             <ul class="sidebar-nav"  style=" ">
                 <li class="sidebar-brand" >
                     <a href="#">
-                        filtryrrr
+                        filtro
                 </li>
                 <li >
 					<div class="dispInlineBlock"  style=" overflow:hidden;">
