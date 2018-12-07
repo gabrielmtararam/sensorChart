@@ -37,6 +37,16 @@ function showHint(str) {
 
 
 
+.list-group-item{
+	border-color:rgba(255, 255, 255, 0);
+color:white;
+background-color: rgba(255, 255, 255, 0.1);
+padding-top: 2px;
+padding-right: 10px;
+padding-bottom: 2px;
+padding-left: 10px;
+}
+
 
 .material-switch > input[type="checkbox"] {
     display: none;   
@@ -130,23 +140,86 @@ function showHint(str) {
 }
 
 .dispInlineBlock{
-
+ width:280px;
 }
 
+
+.label-primary {
+  background-color: #e7ca25;
+}
+.label-primary[href]:hover,
+.label-primary[href]:focus {
+  background-color: #3071a9;
+}
+
+.label-disp8 {
+  background-color: #930000;
+}
+.label-disp8[href]:hover,
+.label-disp8[href]:focus {
+  background-color: #930000;
+}
+
+
+.label-disp7 {
+  background-color: #400040;
+}
+.label-disp7[href]:hover,
+.label-disp7[href]:focus {
+  background-color: #400040;
+}
+
+.label-disp6 {
+  background-color: #004040;
+}
+.label-disp6[href]:hover,
+.label-disp6[href]:focus {
+  background-color: #004040;
+
+
+ 
+ .scrollbar {
+    background-color: #1e9b53;
+    float: left;
+    height: 300px;
+    margin-bottom: 25px;
+    margin-left: 22px;
+    margin-top: 40px;
+    width: 65px;
+    overflow-y: scroll;
+}
+
+#style-1::-webkit-scrollbar {
+    width: 6px;
+    background-color: #F5F5F5;
+} 
+
+#style-1::-webkit-scrollbar-thumb {
+    background-color: #000000;
+}
+
+
+
+#style-1::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+}
 </style>
 <div id="wrapper">
-         <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
+         <div id="sidebar-wrapper"  style="overflow-x: hidden;">
+            <ul class="sidebar-nav"  style=" ">
+                <li class="sidebar-brand" >
                     <a href="#">
-                        filtroscs
+                        filtrosrqqqsdasdqq
                     </a>
                 </li>
                 <li >
-					<div class="dispInlineBlock">
+					<div class="dispInlineBlock"  style=" overflow:hidden;">
 						<div class="container-fluid" style=" padding-right:1px; padding-left:15px;  overflow:hidden;" >
 							<div class="row">
-								<div class="col-sm-2" style=" padding-right:1px; padding-left:0px;"  > 
+								<div class="col-sm-2" style=" padding-right:1px; padding-left:0px; "  > 
 										<span class="spanWhite"  id="ai"  >2018</span> 													
 								</div>
 								<div class="col-sm-3" style="padding-left:0px; padding-right:0px;"> 
@@ -372,6 +445,28 @@ function showHint(str) {
                         <div class="material-switch pull-right">
                             <input id="someSwitchOptionDanger" name="someSwitchOption001" type="checkbox"/>
                             <label for="someSwitchOptionDanger" class="label-danger"></label>
+                        </div>
+                    </li>
+					<li class="list-group-item">
+					Dispositivo 6
+                        <div class="material-switch pull-right">
+                            <input id="switchDisp6" name="someSwitchOption006" type="checkbox"/>
+                            <label for="switchDisp6" class="label-disp6"></label>
+                        </div>
+                    </li>
+					<li class="list-group-item">
+					Dispositivo 7
+                        <div class="material-switch pull-right">
+                            <input id="switchDisp7" name="someSwitchOption007" type="checkbox"/>
+                            <label for="switchDisp7" class="label-disp7"></label>
+                        </div>
+                    </li>
+					
+					<li class="list-group-item">
+					Dispositivo 8
+                        <div class="material-switch pull-right">
+                            <input id="switchDisp8" name="someSwitchOption008" type="checkbox"/>
+                            <label for="switchDisp8" class="label-disp8"></label>
                         </div>
                     </li>
                 </ul>
