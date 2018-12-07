@@ -7,8 +7,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+
+<link rel="stylesheet" href="simplebar.css" />
+<script src="https://unpkg.com/simplebar@latest/dist/simplebar.js"></script>
+
 <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
-    <link href="simple-sidebar.css" rel="stylesheet">
+    
+	<link href="simple-sidebar.css" rel="stylesheet">
   
 <script>
 function showHint(str) {
@@ -208,12 +213,11 @@ padding-left: 10px;
 }
 </style>
 <div id="wrapper">
-         <div id="sidebar-wrapper"  style="overflow-x: hidden;">
+         <div id="sidebar-wrapper"  style="overflow-x: hidden;"  data-simplebar>
             <ul class="sidebar-nav"  style=" ">
                 <li class="sidebar-brand" >
                     <a href="#">
-                        filtrosrqqqsdasdqq
-                    </a>
+                        filtryrrr
                 </li>
                 <li >
 					<div class="dispInlineBlock"  style=" overflow:hidden;">
