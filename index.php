@@ -35,7 +35,7 @@ function showHint(str) {
 
 </script>
 </head>
-<body>
+<body style="background-color: #1e1e1e; ">
 	
 
 <style>
@@ -212,12 +212,17 @@ padding-left: 10px;
 
 }
 </style>
+
+
+
+
+
 <div id="wrapper">
          <div id="sidebar-wrapper"  style="overflow-x: hidden;"  data-simplebar>
             <ul class="sidebar-nav"  style=" ">
                 <li class="sidebar-brand" >
                     <a href="#">
-            FILTROS
+            FILTRO
                         
 
                 </li>
@@ -406,7 +411,52 @@ padding-left: 10px;
 					</div>
 					
                 </li>
+<li >
+					<div class="dispInlineBlock">
+						<div class="container-fluid" style=" padding-right:1px; padding-left:15px;  overflow:hidden;" >
+							<div class="row">
+								<div class="col-sm-2" style=" padding-right:1px; padding-left:0px;"  > 
+										<span class="spanWhite"  id="vi"  >0</span> 													
+								</div>
+								<div class="col-sm-3" style="padding-left:0px; padding-right:0px;"> 
+									 <span  class="spanWhite" >temp min</span>														
+								</div>
+								<div class="col-sm-6" style="padding-left:1px; padding-right:10px;">							   
+										<div class="slidecontainer"  style="display: inline-block;" >
+										  <input type="range" min="-30" max="100" value="0" class="slider" id="slvi" >
+										</div>
+								</div>
+								<div class="col-sm-1" style="padding-left:0px; padding-right:0px;">							   
 
+								</div>
+							</div>
+						</div>
+					</div>
+					
+                </li>
+				<li >
+					<div class="dispInlineBlock">
+						<div class="container-fluid" style=" padding-right:1px; padding-left:15px;  overflow:hidden;" >
+							<div class="row">
+								<div class="col-sm-2" style=" padding-right:1px; padding-left:0px;"  > 
+										<span  class="spanWhite" id="vf"  >40</span> 													
+								</div>
+								<div class="col-sm-3" style="padding-left:0px; padding-right:0px;"> 
+									 <span   class="spanWhite" >temp max</span>														
+								</div>
+								<div class="col-sm-6" style="padding-left:1px; padding-right:10px;">							   
+										<div class="slidecontainer"  style="display: inline-block;" >
+										  <input type="range" min="-30" max="100" value="40" class="slider" id="slvf" >
+										</div>
+								</div>
+								<div class="col-sm-1" style="padding-left:0px; padding-right:0px;">							   
+
+								</div>
+							</div>
+						</div>
+					</div>
+					
+                </li>
 				<li >
 					<div class="dispInlineBlock">
 						<span  class="spanWhite" style="font-size: 18px;">Dispositivos</span> 			
@@ -483,25 +533,21 @@ padding-left: 10px;
 				</li >
             </ul>
         </div>
-		
+		<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#" style=" font-weight: bold;">TSensor Device Visualizer</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li>	<a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle" style=" font-weight: bold;">FILTROS</a></li>
+      <li>	<a href="#CHART-UPDATE" class="btn btn-secondary" id="CHART-UPDATE" style=" font-weight: bold;">GERAR GRAFICO</a></li>
+	  <li>	<a href="#CHART-UPDATE" class="btn btn-secondary" id="CHART-UPDATE" style=" font-weight: bold;">EXPORT CSV</a></li>
+    </ul>
+  </div>
+</nav>
 								
-							<div class="container-fluid " style=" background-image: linear-gradient(to right, rgba(0,0,255,0.2), rgba(0,0,255,0.3)); min-height:200px">
-								<div class="row">	
-									<div class="col-sm-2">
-										<button type="button" class="btn btn-primary" onclick="showHint()">GERAR GRAFICO</button>
-								
+							<div class="container-fluid " >
 
-									</div>	
-									<div class="col-sm-2">
-								
-										<a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">FILTROS</a>
-
-									</div>	
-							
-
-									
-									
-							</div>
 
 								<div class="row">	
 									<div id="grafico"></div>
@@ -513,7 +559,14 @@ padding-left: 10px;
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
-    });
+	});
+	
+	$("#CHART-UPDATE").click(function(e) {
+	
+        showHint();
+       
+	});
+	
     </script>
 <script>
 
@@ -541,6 +594,16 @@ $("#slhi").on('input',function(e){
 
 $("#slhf").on('input',function(e){
 	$("#hf").html($("#slhf").val());
+});
+
+
+$("#slvi").on('input',function(e){
+	$("#vi").html($("#slvi").val());
+});
+
+
+$("#slvf").on('input',function(e){
+	$("#vf").html($("#slvf").val());
 });
 
 
