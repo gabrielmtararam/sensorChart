@@ -34,8 +34,64 @@ function showHint(str) {
 	
 
 <style>
+
+
+
+
+.material-switch > input[type="checkbox"] {
+    display: none;   
+}
+
+.material-switch > label {
+    cursor: pointer;
+    height: 0px;
+    position: relative; 
+    width: 30px;  
+}
+
+.material-switch > label::before {
+    background: rgb(0, 0, 0);
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    content: '';
+    height: 16px;
+    margin-top: -8px;
+    position:absolute;
+    opacity: 0.3;
+    transition: all 0.4s ease-in-out;
+    width: 30px;
+}
+.material-switch > label::after {
+    background: rgb(255, 255, 255);
+    border-radius: 16px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    content: '';
+    height: 20px;
+    left: -4px;
+    margin-top: -8px;
+    position: absolute;
+    top: -4px;
+    transition: all 0.3s ease-in-out;
+    width: 20px;
+}
+.material-switch > input[type="checkbox"]:checked + label::before {
+    background: inherit;
+    opacity: 0.5;
+}
+.material-switch > input[type="checkbox"]:checked + label::after {
+    background: inherit;
+    left: 20px;
+}
+
+
+
+
+.spanWhite{
+
+	color:white;
+}
 .slidecontainer {
-    width: 60%; /* Width of the outside container */
+    width: 100%; /* Width of the outside container */
 }
 
 /* The slider itself */
@@ -44,7 +100,7 @@ function showHint(str) {
     appearance: none;
     width: 100%; /* Full-width */
     height: 25px; /* Specified height */
-    background: #d3d3d3; /* Grey background */
+    background-color: rgba(255, 255, 255, 0.2); /* Grey background */
     outline: none; /* Remove outline */
     opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
     -webkit-transition: .2s; /* 0.2 seconds transition on hover */
@@ -62,130 +118,268 @@ function showHint(str) {
     appearance: none;
     width: 25px; /* Set a specific slider handle width */
     height: 25px; /* Slider handle height */
-    background: #4CAF50; /* Green background */
+    background: #dadada; /* Green background */
     cursor: pointer; /* Cursor on hover */
 }
 
 .slider::-moz-range-thumb {
     width: 15px; /* Set a specific slider handle width */
     height: 15px; /* Slider handle height */
-    background: #4CAF50; /* Green background */
+    background: #dadada; /* Green background */
     cursor: pointer; /* Cursor on hover */
 }
 
 .dispInlineBlock{
-display: inline-block;
+
 }
+
 </style>
-<div id="wrapper">asd
+<div id="wrapper">
          <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
                     <a href="#">
-                        Start Bootstrap
+                        filtroscs
                     </a>
                 </li>
                 <li >
 					<div class="dispInlineBlock">
-						<div class="content">
+						<div class="container-fluid" style=" padding-right:1px; padding-left:15px;  overflow:hidden;" >
 							<div class="row">
-								<div class="class="col-sm-1""> 
-										<span  id="ai"  >0</span> 													
+								<div class="col-sm-2" style=" padding-right:1px; padding-left:0px;"  > 
+										<span class="spanWhite"  id="ai"  >2018</span> 													
 								</div>
-								<div class="col-sm-1""> 
-									 <span  >ccccc inicial</span>														
+								<div class="col-sm-3" style="padding-left:0px; padding-right:0px;"> 
+									 <span class="spanWhite" >Ano inicial</span>														
 								</div>
-								<div class="class="col-sm-2"">							   
+								<div class="col-sm-6" style="padding-left:1px; padding-right:10px;">							   
 										<div class="slidecontainer"  style="display: inline-block;" >
 										  <input type="range" min="2017" max="2030" value="2018" class="slider" id="slai" >
 										</div>
+								</div>
+								<div class="col-sm-1" style="padding-left:0px; padding-right:0px;">							   
+
 								</div>
 							</div>
 						</div>
 					</div>
 					
                 </li>
-                <li>
-				<div class="dispInlineBlock">
-                    <a href="#">
-															<span id="af">0</span> <span>Ano Final</span>
-										<div class="slidecontainer"  style="display: inline-block;">
-										  <input type="range" min="2017" max="2030" value="2019" class="slider" id="slaf">
+				<li >
+					<div class="dispInlineBlock">
+						<div class="container-fluid" style=" padding-right:1px; padding-left:15px;  overflow:hidden;" >
+							<div class="row">
+								<div class="col-sm-2" style=" padding-right:1px; padding-left:0px;"  > 
+										<span  class="spanWhite" id="af"  >2018</span> 													
+								</div>
+								<div class="col-sm-3" style="padding-left:0px; padding-right:0px;"> 
+									 <span class="spanWhite"  >Ano final</span>														
+								</div>
+								<div class="col-sm-6" style="padding-left:1px; padding-right:10px;">							   
+										<div class="slidecontainer"  style="display: inline-block;" >
+										  <input type="range" min="2017" max="2030" value="2018" class="slider" id="slaf" >
 										</div>
-					</a>
-					</div>	
+								</div>
+								<div class="col-sm-1" style="padding-left:0px; padding-right:0px;">							   
+
+								</div>
+							</div>
+						</div>
+					</div>
+					
                 </li>
-                <li>
-				<div class="dispInlineBlock">
-                    <a href="#">
-															<span  id="mi">0</span> <span>Mes inicial</span>
-										<div class="slidecontainer"  style="display: inline-block;">
-										  <input type="range" min="1" max="12" value="1" class="slider" id="slmi">
+				<li >
+					<div class="dispInlineBlock">
+						<div class="container-fluid" style=" padding-right:1px; padding-left:15px;  overflow:hidden;" >
+							<div class="row">
+								<div class="col-sm-2" style=" padding-right:1px; padding-left:0px;"  > 
+										<span class="spanWhite"  id="mi"  >1</span> 													
+								</div>
+								<div class="col-sm-3" style="padding-left:0px; padding-right:0px;"> 
+									 <span   class="spanWhite">mes inicial</span>														
+								</div>
+								<div class="col-sm-6" style="padding-left:1px; padding-right:10px;">							   
+										<div class="slidecontainer"  style="display: inline-block;" >
+										  <input type="range" min="1" max="12" value="1" class="slider" id="slmi" >
 										</div>
-					</a>
-					</div>	
+								</div>
+								<div class="col-sm-1" style="padding-left:0px; padding-right:0px;">							   
+
+								</div>
+							</div>
+						</div>
+					</div>
+					
                 </li>
-                <li>
-				<div class="dispInlineBlock">
-                    <a href="#">
-															<span id="mf">0</span> <span>Mes Final</span>
-										<div class="slidecontainer"  style="display: inline-block;">
-										  <input type="range" min="1" max="12" value="12" class="slider" id="slmf">
+				<li >
+					<div class="dispInlineBlock">
+						<div class="container-fluid" style=" padding-right:1px; padding-left:15px;  overflow:hidden;" >
+							<div class="row">
+								<div class="col-sm-2" style=" padding-right:1px; padding-left:0px;"  > 
+										<span  class="spanWhite" id="mf"  >1</span> 													
+								</div>
+								<div class="col-sm-3" style="padding-left:0px; padding-right:0px;"> 
+									 <span class="spanWhite"  >mes final</span>														
+								</div>
+								<div class="col-sm-6" style="padding-left:1px; padding-right:10px;">							   
+										<div class="slidecontainer"  style="display: inline-block;" >
+										  <input type="range" min="1" max="12" value="1" class="slider" id="slmf" >
 										</div>
-					</a>
-					</div>	
+								</div>
+								<div class="col-sm-1" style="padding-left:0px; padding-right:0px;">							   
+
+								</div>
+							</div>
+						</div>
+					</div>
+					
                 </li>
-                <li>
-				<div class="dispInlineBlock">
-                    <a href="#">
-															<span  id="di">0</span> <span>Dia inicial</span>
-										<div class="slidecontainer"  style="display: inline-block;">
-										  <input type="range" min="1" max="30" value="1" class="slider" id="sldi">
+				<li >
+					<div class="dispInlineBlock">
+						<div class="container-fluid" style=" padding-right:1px; padding-left:15px;  overflow:hidden;" >
+							<div class="row">
+								<div class="col-sm-2" style=" padding-right:1px; padding-left:0px;"  > 
+										<span  class="spanWhite" id="di"  >1</span> 													
+								</div>
+								<div class="col-sm-3" style="padding-left:0px; padding-right:0px;"> 
+									 <span   class="spanWhite" >dia inicial</span>														
+								</div>
+								<div class="col-sm-6" style="padding-left:1px; padding-right:10px;">							   
+										<div class="slidecontainer"  style="display: inline-block;" >
+										  <input type="range" min="1" max="30" value="1" class="slider" id="sldi" >
 										</div>
-					</a>
-					</div>	
+								</div>
+								<div class="col-sm-1" style="padding-left:0px; padding-right:0px;">							   
+
+								</div>
+							</div>
+						</div>
+					</div>
+					
                 </li>
-                <li>
-				<div class="dispInlineBlock">
-                    <a href="#">
-															<span id="df">0</span> <span>Dia Final</span>
-										<div class="slidecontainer"  style="display: inline-block;">
-										  <input type="range" min="1" max="30" value="30" class="slider" id="sldf">
+				<li >
+					<div class="dispInlineBlock">
+						<div class="container-fluid" style=" padding-right:1px; padding-left:15px;  overflow:hidden;" >
+							<div class="row">
+								<div class="col-sm-2" style=" padding-right:1px; padding-left:0px;"  > 
+										<span  class="spanWhite" id="df"  >1</span> 													
+								</div>
+								<div class="col-sm-3" style="padding-left:0px; padding-right:0px;"> 
+									 <span class="spanWhite"  >dia final</span>														
+								</div>
+								<div class="col-sm-6" style="padding-left:1px; padding-right:10px;">							   
+										<div class="slidecontainer"  style="display: inline-block;" >
+										  <input type="range" min="1" max="30" value="30" class="slider" id="sldf" >
 										</div>
-					</a>
-					</div>	
-                </li>
-                <li>
-				<div class="dispInlineBlock">
-                    <a href="#">
-													
-										<span  id="hi">0</span> <span>hora inicial</span>
-										<div class="slidecontainer"  style="display: inline-block;">
-										  <input type="range" min="0" max="24" value="0" class="slider" id="slhi">
-										</div>
-										
-									
-					</a>
-					</div>	
+								</div>
+								<div class="col-sm-1" style="padding-left:0px; padding-right:0px;">							   
+
+								</div>
+							</div>
+						</div>
+					</div>
+					
                 </li>
 				
-				<li>
-				<div class="dispInlineBlock">
-                    <a href="#">
-															<span id="hf">0</span> <span>hora Final</span>
-										<div class="slidecontainer"  style="display: inline-block;">
-										  <input type="range" min="0" max="24" value="24" class="slider" id="slhf">
+				<li >
+					<div class="dispInlineBlock">
+						<div class="container-fluid" style=" padding-right:1px; padding-left:15px;  overflow:hidden;" >
+							<div class="row">
+								<div class="col-sm-2" style=" padding-right:1px; padding-left:0px;"  > 
+										<span class="spanWhite"  id="hi"  >0</span> 													
+								</div>
+								<div class="col-sm-3" style="padding-left:0px; padding-right:0px;"> 
+									 <span  class="spanWhite" >hora inicial</span>														
+								</div>
+								<div class="col-sm-6" style="padding-left:1px; padding-right:10px;">							   
+										<div class="slidecontainer"  style="display: inline-block;" >
+										  <input type="range" min="0" max="24" value="0" class="slider" id="slhi" >
 										</div>
-					</a>
-					</div>	
-                </li>
-				<li>
-				<div class="dispInlineBlock">
-                    <a href="#">
+								</div>
+								<div class="col-sm-1" style="padding-left:0px; padding-right:0px;">							   
+
+								</div>
+							</div>
+						</div>
+					</div>
 					
-					</a>
-					</div>	
                 </li>
+				<li >
+					<div class="dispInlineBlock">
+						<div class="container-fluid" style=" padding-right:1px; padding-left:15px;  overflow:hidden;" >
+							<div class="row">
+								<div class="col-sm-2" style=" padding-right:1px; padding-left:0px;"  > 
+										<span  class="spanWhite" id="hf"  >24</span> 													
+								</div>
+								<div class="col-sm-3" style="padding-left:0px; padding-right:0px;"> 
+									 <span   class="spanWhite" >hora final</span>														
+								</div>
+								<div class="col-sm-6" style="padding-left:1px; padding-right:10px;">							   
+										<div class="slidecontainer"  style="display: inline-block;" >
+										  <input type="range" min="0" max="24" value="24" class="slider" id="slhf" >
+										</div>
+								</div>
+								<div class="col-sm-1" style="padding-left:0px; padding-right:0px;">							   
+
+								</div>
+							</div>
+						</div>
+					</div>
+					
+                </li>
+
+				<li >
+					<div class="dispInlineBlock">
+						<span  class="spanWhite" style="font-size: 18px;">Dispositivos</span> 			
+					</div>
+				</li >
+				
+				<li >
+					<div class="dispInlineBlock">
+						
+					<ul class="list-group">
+
+                    <li class="list-group-item">
+                        Dispositivo 1
+                        <div class="material-switch pull-right">
+                            <input id="someSwitchOptionPrimary" name="someSwitchOption001" type="checkbox"/>
+                            <label for="someSwitchOptionPrimary" class="label-primary"></label>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+					Dispositivo 2
+                        <div class="material-switch pull-right">
+                            <input id="someSwitchOptionSuccess" name="someSwitchOption001" type="checkbox"/>
+                            <label for="someSwitchOptionSuccess" class="label-success"></label>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+					Dispositivo 3
+                        <div class="material-switch pull-right">
+                            <input id="someSwitchOptionInfo" name="someSwitchOption001" type="checkbox"/>
+                            <label for="someSwitchOptionInfo" class="label-info"></label>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+					Dispositivo 4
+                        <div class="material-switch pull-right">
+                            <input id="someSwitchOptionWarning" name="someSwitchOption001" type="checkbox"/>
+                            <label for="someSwitchOptionWarning" class="label-warning"></label>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+					Dispositivo 5
+                        <div class="material-switch pull-right">
+                            <input id="someSwitchOptionDanger" name="someSwitchOption001" type="checkbox"/>
+                            <label for="someSwitchOptionDanger" class="label-danger"></label>
+                        </div>
+                    </li>
+                </ul>
+
+
+						
+					</div>
+				</li >
             </ul>
         </div>
 		
