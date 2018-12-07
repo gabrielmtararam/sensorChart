@@ -218,9 +218,9 @@ padding-left: 10px;
                 <li class="sidebar-brand" >
                     <a href="#">
 <<<<<<< HEAD
-                        FILTROSsss
+                        FILTROS
 =======
-                        filtro
+                        
 >>>>>>> 3183425b27c4f5bbe29d4a9db7c9f2600003d24b
                 </li>
                 <li >
