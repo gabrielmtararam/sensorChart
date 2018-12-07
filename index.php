@@ -217,11 +217,9 @@ padding-left: 10px;
             <ul class="sidebar-nav"  style=" ">
                 <li class="sidebar-brand" >
                     <a href="#">
-<<<<<<< HEAD
-                        FILTROS
-=======
+            FILTROS
                         
->>>>>>> 3183425b27c4f5bbe29d4a9db7c9f2600003d24b
+
                 </li>
                 <li >
 					<div class="dispInlineBlock"  style=" overflow:hidden;">
