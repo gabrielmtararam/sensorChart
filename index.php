@@ -217,7 +217,7 @@ padding-left: 10px;
             <ul class="sidebar-nav"  style=" ">
                 <li class="sidebar-brand" >
                     <a href="#">
-                        filtryrrr
+                        FILTROS
                 </li>
                 <li >
 					<div class="dispInlineBlock"  style=" overflow:hidden;">
@@ -486,8 +486,13 @@ padding-left: 10px;
 							<div class="container-fluid " style=" background-image: linear-gradient(to right, rgba(0,0,255,0.2), rgba(0,0,255,0.3)); min-height:200px">
 								<div class="row">	
 									<div class="col-sm-2">
-										<button type="button" class="btn btn-primary" onclick="showHint()">ry</button>
-										<a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
+										<button type="button" class="btn btn-primary" onclick="showHint()">GERAR GRAFICO</button>
+								
+
+									</div>	
+									<div class="col-sm-2">
+								
+										<a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">FILTROS</a>
 
 									</div>	
 							
