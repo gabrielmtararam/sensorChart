@@ -4,36 +4,73 @@
 
 
 // get the q parameter from URL
+$teste=$_POST['json_name'];
 
-$hint = "";
+include 'db_connect.php';
+
+  $json_str = file_get_contents('php://input');
+
+# Get as an object
+  $json_obj = json_decode($json_str,true);
+ 
+    
+    $contador=0;
+    $minTemp=100;
+    $maxTemp=-100;
+    $hint2= "";
+    $txt="";
+    $query = "SELECT * FROM `Tsensor`
+     WHERE HOUR(ts_data)>=". $json_obj["lower_hour"]." ".
+     " AND". " HOUR(ts_data)<=". $json_obj["upper_hour"]."".
+
+     " AND". " DAY(ts_data)>=". $json_obj["lower_day"]."".
+     " AND". " DAY(ts_data)<=". $json_obj["upper_day"]."".
+
+     " AND". " MONTH(ts_data)>=". $json_obj["lower_month"]."".
+     " AND". " MONTH(ts_data)<=". $json_obj["upper_month"]."".
+
+     
+     " AND". " YEAR(ts_data)>=". $json_obj["lower_year"]."".
+     " AND". " YEAR(ts_data)<=". $json_obj["upper_year"]."".
+
+     " AND". " ts_temperature>=". $json_obj["lower_temperature"]."".
+     " AND". " ts_temperature<=". $json_obj["upper_temperature"]."".
+     " AND". " ts_device=1"
+     
+     
+     ;
+    if ($result=mysqli_query($conn,$query))
+    {
+     if(mysqli_num_rows($result) > 0)
+      {
+        while($row = $result->fetch_assoc()) {
+          $dateFormated=strtotime( $row["ts_data"]);
+          $dateFormated=$dateFormated*1000;
+          $aux='['.$dateFormated.','.$row["ts_temperature"].']';
+          
+          $temperature=(float)$row["ts_temperature"];
+          if ($temperature<$minTemp)
+            $minTemp=$temperature;
+          if ($temperature>$maxTemp)
+            $maxTemp=$temperature;
+
+          $hint2 .=$aux.",";
+          $hint2 .=$aux.",";
+          $txt.= "idrs: " . $row["ts_ID"]. " - data: " . $dateFormated. " temp" . $row["ts_temperature"]. " device" . $row["ts_device"]. "<br>";
+        }
+        $hint2=substr($hint2, 0, -1);
+        $minTemp=$minTemp;
+      }
+
+    }
+  else{
+    echo "Query  Failed: " . $query  . "<br>";
+
+  }
 
 
-$fh = fopen(dirname(__FILE__).'/1_log.txt','r');
-		$txt = " ";
-		$lastDate=Null;
-		$hint2="";
-		$contador=0;
-		$maxSamples=300;
-		$minTemp=100;
-		while (($line = fgets($fh))&&($contador<=$maxSamples)) {
-			$dateTemp = explode(";", $line);
-			$date=strtotime($dateTemp[0]);
-			$temperature=$dateTemp[1];
-			
-			if ($temperature<$minTemp)
-				$minTemp=$temperature;
-			$DateMs=$date*1000;
-			$txt.= $DateMs;
-			$txt .= "  \n ";
-			$aux='['.$DateMs.','.$temperature.']';
-			$hint2 .=$aux.",";
-			$contador++;
-			$lastDate=$DateMs;
 
-		}
-		$minTemp=$minTemp-5;
-		fclose($fh);
-		$hint2=substr($hint2, 0, -1);
+
  $hint .="
 
 
@@ -115,16 +152,17 @@ $fh = fopen(dirname(__FILE__).'/1_log.txt','r');
         margin: 'dynamic 70'
       },
       plot: {
-        aspect: 'spline',
+        aspect: 'segmented',
         lineWidth: 2,
         marker: {
           borderWidth: 0,
-          size: 5
+          size: 3
         }
       },
 	  
 	    scaleY: {
-		minValue: ".$minTemp.",
+    minValue: ".$minTemp.",
+    maxValue: ".$maxTemp.",
         minorTicks: 1,
         lineColor: '#E3E3E5',
         tick: {
@@ -172,7 +210,7 @@ $fh = fopen(dirname(__FILE__).'/1_log.txt','r');
           borderRadius: 3
         },
         marker: {
-          size: 7,
+          size: 5,
           alpha: 0.5
         }
       },
@@ -242,7 +280,6 @@ $fh = fopen(dirname(__FILE__).'/1_log.txt','r');
 
   ";
 echo $hint;
-echo " <div>".$txt."
-
-<\div>";
+echo $maxTemp ;
+echo " bbbbbrrr <div> ".$txt." <\div>";
 ?> 

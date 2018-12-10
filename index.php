@@ -29,8 +29,32 @@ function showHint(str) {
 				
             }
         };
-        xmlhttp.open("GET", "getHint.php?" + str, true);
-        xmlhttp.send();
+        xmlhttp.open("POST", "getHint.php?" + str, true);
+		
+		var json_upload = "" + JSON.stringify({
+			lower_year:$("#slai").val(), 
+			upper_year:$("#slaf").val(), 
+
+			lower_month:$("#slmi").val(), 
+			upper_month:$("#slmf").val(), 
+
+			lower_day:$("#sldi").val(), 
+			upper_day:$("#sldf").val(), 
+
+			lower_hour:$("#slhi").val(), 
+			upper_hour:$("#slhf").val(), 
+
+			
+			lower_temperature:$("#slvi").val(), 
+			upper_temperature:$("#slvf").val()
+
+		
+		
+		});
+	//	alert(" "+json_upload);
+		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xmlhttp.send(json_upload);
+        //xmlhttp.send();
     }
 
 </script>
@@ -300,14 +324,14 @@ padding-left: 10px;
 						<div class="container-fluid" style=" padding-right:1px; padding-left:15px;  overflow:hidden;" >
 							<div class="row">
 								<div class="col-sm-2" style=" padding-right:1px; padding-left:0px;"  > 
-										<span  class="spanWhite" id="mf"  >1</span> 													
+										<span  class="spanWhite" id="mf"  >12</span> 													
 								</div>
 								<div class="col-sm-3" style="padding-left:0px; padding-right:0px;"> 
 									 <span class="spanWhite"  >mes final</span>														
 								</div>
 								<div class="col-sm-6" style="padding-left:1px; padding-right:10px;">							   
 										<div class="slidecontainer"  style="display: inline-block;" >
-										  <input type="range" min="1" max="12" value="1" class="slider" id="slmf" >
+										  <input type="range" min="1" max="12" value="12" class="slider" id="slmf" >
 										</div>
 								</div>
 								<div class="col-sm-1" style="padding-left:0px; padding-right:0px;">							   
@@ -423,7 +447,7 @@ padding-left: 10px;
 								</div>
 								<div class="col-sm-6" style="padding-left:1px; padding-right:10px;">							   
 										<div class="slidecontainer"  style="display: inline-block;" >
-										  <input type="range" min="-30" max="100" value="0" class="slider" id="slvi" >
+										  <input type="range" min="0" max="100" value="0" class="slider" id="slvi" >
 										</div>
 								</div>
 								<div class="col-sm-1" style="padding-left:0px; padding-right:0px;">							   
@@ -446,7 +470,7 @@ padding-left: 10px;
 								</div>
 								<div class="col-sm-6" style="padding-left:1px; padding-right:10px;">							   
 										<div class="slidecontainer"  style="display: inline-block;" >
-										  <input type="range" min="-30" max="100" value="40" class="slider" id="slvf" >
+										  <input type="range" min="0" max="100" value="40" class="slider" id="slvf" >
 										</div>
 								</div>
 								<div class="col-sm-1" style="padding-left:0px; padding-right:0px;">							   
@@ -468,63 +492,54 @@ padding-left: 10px;
 						
 					<ul class="list-group">
 
-                    <li class="list-group-item">
-                        Dispositivo 1
-                        <div class="material-switch pull-right">
-                            <input id="someSwitchOptionPrimary" name="someSwitchOption001" type="checkbox"/>
-                            <label for="someSwitchOptionPrimary" class="label-primary"></label>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-					Dispositivo 2
-                        <div class="material-switch pull-right">
-                            <input id="someSwitchOptionSuccess" name="someSwitchOption001" type="checkbox"/>
-                            <label for="someSwitchOptionSuccess" class="label-success"></label>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-					Dispositivo 3
-                        <div class="material-switch pull-right">
-                            <input id="someSwitchOptionInfo" name="someSwitchOption001" type="checkbox"/>
-                            <label for="someSwitchOptionInfo" class="label-info"></label>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-					Dispositivo 4
-                        <div class="material-switch pull-right">
-                            <input id="someSwitchOptionWarning" name="someSwitchOption001" type="checkbox"/>
-                            <label for="someSwitchOptionWarning" class="label-warning"></label>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-					Dispositivo 5
-                        <div class="material-switch pull-right">
-                            <input id="someSwitchOptionDanger" name="someSwitchOption001" type="checkbox"/>
-                            <label for="someSwitchOptionDanger" class="label-danger"></label>
-                        </div>
-                    </li>
-					<li class="list-group-item">
-					Dispositivo 6
-                        <div class="material-switch pull-right">
-                            <input id="switchDisp6" name="someSwitchOption006" type="checkbox"/>
-                            <label for="switchDisp6" class="label-disp6"></label>
-                        </div>
-                    </li>
-					<li class="list-group-item">
-					Dispositivo 7
-                        <div class="material-switch pull-right">
-                            <input id="switchDisp7" name="someSwitchOption007" type="checkbox"/>
-                            <label for="switchDisp7" class="label-disp7"></label>
-                        </div>
-                    </li>
-					
-					<li class="list-group-item">
-					Dispositivo 8
-                        <div class="material-switch pull-right">
-                            <input id="switchDisp8" name="someSwitchOption008" type="checkbox"/>
-                            <label for="switchDisp8" class="label-disp8"></label>
-                        </div>
-                    </li>
+							<?php
+
+								include 'db_connect.php';
+
+
+								$query = "SELECT * FROM `userDevice` WHERE ud_user>=1";
+								if ($result=mysqli_query($conn,$query))
+								{
+								if(mysqli_num_rows($result) > 0)
+								{
+									while($row = $result->fetch_assoc()) {
+
+										
+										$color=  substr(md5(rand()), 0, 6);;
+										echo "
+										<style>
+										.label-disp".$row["ud_ID"]." {
+											background-color: #".$color.";
+										  }
+										  .label-disp".$row["ud_ID"]."6[href]:hover,
+										  .label-disp".$row["ud_ID"]."[href]:focus {
+											background-color: #".$color.";
+										</style>
+										<li class=\"list-group-item\">".
+											$row["ud_name"]
+											."<div class=\"material-switch pull-right\">
+												<input id=\"switchDisp".$row["ud_ID"]."\" name=\"someSwitchOption001\" type=\"checkbox\"/>
+												<label for=\"switchDisp".$row["ud_ID"]."\" class=\"label-disp".$row["ud_ID"]."\"></label>
+											</div>
+										</li>";
+										
+										
+									}
+
+								}
+
+								}
+								else{
+									echo "Query  Failed: " . $query  . "<br>";
+
+								}
+
+
+
+
+							?>
+
+							
                 </ul>
 
 
@@ -539,7 +554,7 @@ padding-left: 10px;
       <a class="navbar-brand" href="#" style=" font-weight: bold;">TSensor Device Visualizer</a>
     </div>
     <ul class="nav navbar-nav">
-      <li>	<a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle" style=" font-weight: bold;">FILTROS</a></li>
+      <li>	<a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle" style=" font-weight: bold;">FILTROSRRc</a></li>
       <li>	<a href="#CHART-UPDATE" class="btn btn-secondary" id="CHART-UPDATE" style=" font-weight: bold;">GERAR GRAFICO</a></li>
 	  <li>	<a href="#CHART-UPDATE" class="btn btn-secondary" id="CHART-UPDATE" style=" font-weight: bold;">EXPORT CSV</a></li>
     </ul>
@@ -570,49 +585,63 @@ padding-left: 10px;
     </script>
 <script>
 
+$( document ).ready(function() {
+	showHint("");
+});
+
 $("#slmi").on('input',function(e){
 	$("#mi").html($("#slmi").val());
+	showHint("");
 });
 
 $("#slmf").on('input',function(e){
 	$("#mf").html($("#slmf").val());
+	showHint("");
 });
 
 $("#slai").on('input',function(e){
 	$("#ai").html($("#slai").val());
+	showHint("");
 });
 
 $("#slaf").on('input',function(e){
 	$("#af").html($("#slaf").val());
+	showHint("");
 });
 
 
 $("#slhi").on('input',function(e){
 	$("#hi").html($("#slhi").val());
+	showHint("");
 });
 
 
 $("#slhf").on('input',function(e){
 	$("#hf").html($("#slhf").val());
+	showHint("");
 });
 
 
 $("#slvi").on('input',function(e){
 	$("#vi").html($("#slvi").val());
+	showHint("");
 });
 
 
 $("#slvf").on('input',function(e){
 	$("#vf").html($("#slvf").val());
+	showHint("");
 });
 
 
 $("#sldi").on('input',function(e){
 	$("#di").html($("#sldi").val());
+	showHint("");
 });
 
 $("#sldf").on('input',function(e){
 	$("#df").html($("#sldf").val());
+	showHint("");
 });
 //$("#grafico").html(this.responseText);
 //var slmi = document.getElementById("slmi");
