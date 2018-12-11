@@ -17,7 +17,30 @@
   
 <script>
 function showHint(str) {
+
+		var ids=[];
+		var colors=[];
+		var elements = document.getElementsByClassName("material-switch pull-right");
+		for (var i = 0, len = elements.length; i < len; i++) {
+			// elements[i].style ...
+			ids.push( elements[i].id);
+		}
 		
+
+		for (var i = 0, len = elements.length; i < len; i++) {
+			// elements[i].style ...
+			var elem,style;
+			elem = document.querySelector('.label-disp'+elements[i].id);
+			style = getComputedStyle(elem);
+			var rgb=style.backgroundColor;
+			var color="";
+			var result="";
+			result= '#' + rgb.substr(4, rgb.indexOf(')') - 4).split(',').map((color) => parseInt(color).toString(16)).join('');
+			colors.push( result);
+		}
+
+		//alert("colours344 : "+colors);
+
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
@@ -29,6 +52,7 @@ function showHint(str) {
 				
             }
         };
+	
         xmlhttp.open("POST", "getHint.php?" + str, true);
 		
 		var json_upload = "" + JSON.stringify({
@@ -46,8 +70,9 @@ function showHint(str) {
 
 			
 			lower_temperature:$("#slvi").val(), 
-			upper_temperature:$("#slvf").val()
-
+			upper_temperature:$("#slvf").val(),
+			device_ids:ids,
+			device_colours:colors
 		
 		
 		});
@@ -511,13 +536,13 @@ padding-left: 10px;
 										.label-disp".$row["ud_ID"]." {
 											background-color: #".$color.";
 										  }
-										  .label-disp".$row["ud_ID"]."6[href]:hover,
+										  .label-disp".$row["ud_ID"]."[href]:hover,
 										  .label-disp".$row["ud_ID"]."[href]:focus {
 											background-color: #".$color.";
 										</style>
 										<li class=\"list-group-item\">".
 											$row["ud_name"]
-											."<div class=\"material-switch pull-right\">
+											."<div class=\"material-switch pull-right\" id=".$row["ud_ID"].">
 												<input id=\"switchDisp".$row["ud_ID"]."\" name=\"someSwitchOption001\" type=\"checkbox\"/>
 												<label for=\"switchDisp".$row["ud_ID"]."\" class=\"label-disp".$row["ud_ID"]."\"></label>
 											</div>

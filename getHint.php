@@ -13,60 +13,44 @@ include 'db_connect.php';
 # Get as an object
   $json_obj = json_decode($json_str,true);
  
-    
-    $contador=0;
-    $minTemp=100;
-    $maxTemp=-100;
-    $hint2= "";
-    $txt="";
-    $query = "SELECT * FROM `Tsensor`
-     WHERE HOUR(ts_data)>=". $json_obj["lower_hour"]." ".
-     " AND". " HOUR(ts_data)<=". $json_obj["upper_hour"]."".
 
-     " AND". " DAY(ts_data)>=". $json_obj["lower_day"]."".
-     " AND". " DAY(ts_data)<=". $json_obj["upper_day"]."".
+  $minTemp=100;
+  $query = "SELECT * FROM `Tsensor`
+   WHERE HOUR(ts_data)>=". $json_obj["lower_hour"]." ".
+   " AND". " HOUR(ts_data)<=". $json_obj["upper_hour"]."".
 
-     " AND". " MONTH(ts_data)>=". $json_obj["lower_month"]."".
-     " AND". " MONTH(ts_data)<=". $json_obj["upper_month"]."".
+   " AND". " DAY(ts_data)>=". $json_obj["lower_day"]."".
+   " AND". " DAY(ts_data)<=". $json_obj["upper_day"]."".
 
-     
-     " AND". " YEAR(ts_data)>=". $json_obj["lower_year"]."".
-     " AND". " YEAR(ts_data)<=". $json_obj["upper_year"]."".
+   " AND". " MONTH(ts_data)>=". $json_obj["lower_month"]."".
+   " AND". " MONTH(ts_data)<=". $json_obj["upper_month"]."".
 
-     " AND". " ts_temperature>=". $json_obj["lower_temperature"]."".
-     " AND". " ts_temperature<=". $json_obj["upper_temperature"]."".
-     " AND". " ts_device=1"
-     
-     
-     ;
-    if ($result=mysqli_query($conn,$query))
+   
+   " AND". " YEAR(ts_data)>=". $json_obj["lower_year"]."".
+   " AND". " YEAR(ts_data)<=". $json_obj["upper_year"]."".
+
+   " AND". " ts_temperature>=". $json_obj["lower_temperature"]."".
+   " AND". " ts_temperature<=". $json_obj["upper_temperature"]."".
+   "  ORDER BY ts_temperature ASC LIMIT 1"
+   
+   
+   ;
+  if ($result=mysqli_query($conn,$query))
+  {
+   if(mysqli_num_rows($result) > 0)
     {
-     if(mysqli_num_rows($result) > 0)
-      {
-        while($row = $result->fetch_assoc()) {
-          $dateFormated=strtotime( $row["ts_data"]);
-          $dateFormated=$dateFormated*1000;
-          $aux='['.$dateFormated.','.$row["ts_temperature"].']';
-          
-          $temperature=(float)$row["ts_temperature"];
-          if ($temperature<$minTemp)
-            $minTemp=$temperature;
-          if ($temperature>$maxTemp)
-            $maxTemp=$temperature;
-
-          $hint2 .=$aux.",";
-          $hint2 .=$aux.",";
-          $txt.= "idrs: " . $row["ts_ID"]. " - data: " . $dateFormated. " temp" . $row["ts_temperature"]. " device" . $row["ts_device"]. "<br>";
-        }
-        $hint2=substr($hint2, 0, -1);
-        $minTemp=$minTemp;
-      }
-
+      while($row = $result->fetch_assoc()) { 
+             $minTemp=$row["ts_temperature"];
+         }
     }
-  else{
-    echo "Query  Failed: " . $query  . "<br>";
 
   }
+else{
+  echo "Query  Failed: " . $query  . "<br>";
+
+}
+    
+  
 
 
 
@@ -162,7 +146,6 @@ include 'db_connect.php';
 	  
 	    scaleY: {
     minValue: ".$minTemp.",
-    maxValue: ".$maxTemp.",
         minorTicks: 1,
         lineColor: '#E3E3E5',
         tick: {
@@ -248,19 +231,79 @@ include 'db_connect.php';
 	  
 	  
 	  ,  
-      series: [{
-        values: [";
-		
-		
-		 $hint .=$hint2;
-	
-		 $hint .="],
-        lineColor: '#E34247',
-        marker: {
-          backgroundColor: '#E34247'
-        }
-      }]
-    };
+      series: [";
+        $contador2=0;
+        foreach ($json_obj["device_ids"] as $obj) {
+                  $contador=0;
+                  $maxTemp=-100;
+                  $hint2= "";
+                  $txt="";
+                  $query = "SELECT * FROM `Tsensor`
+                  WHERE HOUR(ts_data)>=". $json_obj["lower_hour"]." ".
+                  " AND". " HOUR(ts_data)<=". $json_obj["upper_hour"]."".
+              
+                  " AND". " DAY(ts_data)>=". $json_obj["lower_day"]."".
+                  " AND". " DAY(ts_data)<=". $json_obj["upper_day"]."".
+              
+                  " AND". " MONTH(ts_data)>=". $json_obj["lower_month"]."".
+                  " AND". " MONTH(ts_data)<=". $json_obj["upper_month"]."".
+              
+                  
+                  " AND". " YEAR(ts_data)>=". $json_obj["lower_year"]."".
+                  " AND". " YEAR(ts_data)<=". $json_obj["upper_year"]."".
+              
+                  " AND". " ts_temperature>=". $json_obj["lower_temperature"]."".
+                  " AND". " ts_temperature<=". $json_obj["upper_temperature"]."".
+                  " AND". " ts_device=". $obj." "
+                  
+                  
+                  ;
+                  if ($result=mysqli_query($conn,$query))
+                  {
+                  if(mysqli_num_rows($result) > 0)
+                    {
+                      while($row = $result->fetch_assoc()) {
+                        $dateFormated=strtotime( $row["ts_data"]);
+                        $dateFormated=$dateFormated*1000;
+                        $aux='['.$dateFormated.','.$row["ts_temperature"].']';
+                        
+                        $temperature=(float)$row["ts_temperature"];
+                        if ($temperature>$maxTemp)
+                          $maxTemp=$temperature;
+              
+                        $hint2 .=$aux.",";
+                        $hint2 .=$aux.",";
+                        $txt.= "idrs: " . $row["ts_ID"]. " - data: " . $dateFormated. " temp" . $row["ts_temperature"]. " device" . $row["ts_device"]. "<br>";
+                      }
+                      $hint2=substr($hint2, 0, -1);
+              
+                    }
+              
+                  }
+                else{
+                  echo "Query  Failed: " . $query  . "<br>";
+              
+                }
+                  $hint .="
+                  {values: [";
+
+              $hint .=$hint2;
+             
+              $hint .="]".
+              
+              "
+              
+              ,
+                  lineColor: '". $json_obj["device_colours"][$contador2]."',
+                  marker: {
+                    backgroundColor: '". $json_obj["device_colours"][$contador2]."'
+                  }
+                },";
+
+      $contador2++;
+    }
+      $hint .="
+  ]};
 
     zingchart.bind('myChart', 'shape_click', function(p) {
       if (p.shapeid == \"view_all\") {
@@ -280,6 +323,13 @@ include 'db_connect.php';
 
   ";
 echo $hint;
-echo $maxTemp ;
+echo "qqqq ";
+$contador=0;
+
+foreach ($json_obj["device_ids"] as $obj) {
+  echo $json_obj["device_colours"][$contador]." "  ;
+  $contador++;
+}
+echo " vvv";
 echo " bbbbbrrr <div> ".$txt." <\div>";
 ?> 
